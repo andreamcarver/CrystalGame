@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crystal Game</title>
+    <style>
+
+    </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body> 
+
+<h1>Crystal Game</h1>
+<div id="instructions">You will be given a random number at the start of the game.
+    <p>There are four crystals below. By clicking on a crystal you will add a specific
+        amount of points to your total score.
+    </p>
+    <p>You win the game by matching your total score to a random number. You lose
+        the game if your total score goes above the random number.
+    </p>
+    <p>The value of each crystal is hidden from you until you click on it.</p>
+    <p>Each time when the game starts, the game will change the values of each crystal.</p>
+</div>
+<div id="goalNumber">Goal Number: </div>
+<div id ="status"></div>
+<div id="crystals">
+    <button onclick="myClick(crystal1)">
+        <img id="crystal1" src="Assets/sailor_1x.jpg">
+    </button>
+    <button onclick="myClick(crystal2)">
+        <img id="crystal2" src="Assets/sailor_2x.jpg">
+    </button>
+    <button onclick="myClick(crystal3)">
+        <img id="crystal3" src="Assets/sailor_3x.jpg">
+    </button>
+    <button onclick="myClick(crystal4)">
+        <img id="crystal4" src="Assets/sailor_4x.jpg">
+    </button>
+</div>
+<div id ="score">Your Total Score:</div>
+
+    
+</body>
+<script>
+        function startGame() {
+            // Randomly picks number between 15 and 50
+            goal = Math.floor(Math.random()*101) +19;
+            // Displays the goal number to the screen
+            $("#goalNumber").text("Goal Number: " + goal)
+            // Displays wins and losses
+            $("#status").text('Wins: ' + wins + ' Losses: ' + losses)
+            // Assigns value to crystals
+            crystal1 = Math.floor(Math.random()*12) +1;
+            crystal2 = Math.floor(Math.random()*12) +1;
+            crystal3 = Math.floor(Math.random()*12) +1;
+            crystal4 = Math.floor(Math.random()*12) +1;
+            total = 0;
+            $("#score").text("Your Current Score: " + total);
+        };
+    
+        wins = 0;
+        losses = 0;
+
+        // initializes game
+        startGame();
+
+        //function to check if game is over& whether to add a win or loss; reinitializes game
+        function gameOver() {
+            if (total === goal) {
+                wins = wins + 1;
+                startGame();
+            } else if (total > goal) {
+                losses = losses +1;
+                startGame();
+        };
+    }
+    
+        function myClick(value) {
+          total += value;
+          $("#score").text("Your Current Score: " + total);
+          gameOver();
+        }
+   
+    
+    
+    </script>
+</html>
